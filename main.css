@@ -1,0 +1,42 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-image: url('https://www.tynker.com/projects/screenshot/5b36e51e94e01d66268b456f/space-invaders.png');
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 0
+}
+
+.grid {
+  display: flex;
+  flex-direction: row;
+  border: 1px solid grey;
+  width: 600px;
+  height: 600px;
+  flex-wrap: wrap;
+}
+
+.cell {
+  width: 5%;
+  height: 5%;
+  border: 1px solid green;
+}
+
+.player {
+  background-image: url('https://lh3.googleusercontent.com/proxy/Qtw3N38a4tBswGjcxQiQWgQ-VXZ5r_Q-xR7k1t-EZSvoqa-aKFlA6tLJOCCiu_eY0auDsppBtTa7bTqghaxsmvH3iEUJGU9d');
+  background-size: contain;
+}
+
+.alien {
+  background-image: url('https://toppng.com/uploads/thumbnail//space-invaders-alien-space-invaders-alien-sprite-11563209507nmwvdi8s7b.png');
+  background-size: contain;
+}
+
+.laser {
+  background-image: url('https://lh3.googleusercontent.com/proxy/8ZjMZ2PvnUzZZoXEDmb8fupHuaK9Vz_dUpZRsnxzgwZ3s2Sh0MOs-yEz23mZlYGb0ZUmmxcumrwU91gxzQ4PrdXphzKbGaxS');
+}
