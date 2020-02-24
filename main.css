@@ -39,6 +39,7 @@ body {
 
 .laser {
   background-image: url('https://wiki.computationalthinkingfoundation.org/wiki/images/d/d0/SpaceInvadersLaserDepiction.png');
+  background-size: contain;
 }
 
 .bomb {
