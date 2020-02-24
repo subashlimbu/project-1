@@ -3,7 +3,7 @@
 }
 
 body {
-  background-image: url('https://www.tynker.com/projects/screenshot/5b36e51e94e01d66268b456f/space-invaders.png');
+  /* background-image: url('https://www.tynker.com/projects/screenshot/5b36e51e94e01d66268b456f/space-invaders.png'); */
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -28,7 +28,7 @@ body {
 }
 
 .player {
-  background-image: url('https://lh3.googleusercontent.com/proxy/Qtw3N38a4tBswGjcxQiQWgQ-VXZ5r_Q-xR7k1t-EZSvoqa-aKFlA6tLJOCCiu_eY0auDsppBtTa7bTqghaxsmvH3iEUJGU9d');
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRE6lQv4CewQp82n8ATj67gFqvDqUJyXLr_qF8CRWtMK6OSUfoU');
   background-size: contain;
 }
 
@@ -38,5 +38,9 @@ body {
 }
 
 .laser {
-  background-image: url('https://lh3.googleusercontent.com/proxy/8ZjMZ2PvnUzZZoXEDmb8fupHuaK9Vz_dUpZRsnxzgwZ3s2Sh0MOs-yEz23mZlYGb0ZUmmxcumrwU91gxzQ4PrdXphzKbGaxS');
+  background-image: url('https://wiki.computationalthinkingfoundation.org/wiki/images/d/d0/SpaceInvadersLaserDepiction.png');
+}
+
+.bomb {
+  background-image: url('https://wiki.computationalthinkingfoundation.org/wiki/images/7/7f/SpaceInvadersAlienBombDepiction.png');
 }
