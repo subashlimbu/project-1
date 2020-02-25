@@ -91,49 +91,60 @@ function setupGame() {
           clearInterval(intervalId)
         }
       })
-    }, 100)
+    }, 500)
   }
   alienMoving()
 
-  function stopLaser() {
-    cells[laserIndex].classList.remove('laser')
-    clearInterval(timerLaserId)
-    laserIndex = null
-  }
-
   function startBomb() {
-   
+
     // console.log(randomComputerIndex)
     // console.log(randomComputerIndex)
-    const alienFront = alienArray.slice(-10)
-    const randomComputerIndex = Math.floor(Math.random() * alienFront.length)
+    const alienFront = alienArray.slice(-11)
+    console.log(alienFront)
+    let randomComputerIndex = Math.floor(Math.random() * alienFront.length)
+    console.log(randomComputerIndex)
 
-// alienFront[randomComputerIndex] + width
-
-
-    // console.log(a)
-    bombIndex = parseInt(a)
-    // console.log(bombIndex)
     const timerBombId = setInterval(() => {
-      if (bombIndex < (width * width)) {
-        cells[bombIndex].classList.add('bomb')
-        setTimeout(() => {
-          bombId = setInterval(() => {
-            cells[bombIndex].classList.remove('bomb')
-            bombIndex += width
-            // console.log(bombIndex)
-            cells[bombIndex].classList.add('bomb')
-            if (bombIndex <= 21) {
-              clearInterval(laserRepeat)
-            }
-            startBomb()
-          }, 200)
-        }, 200)
-
+      const dropBomb = alienFront[randomComputerIndex]
+      if (dropBomb > 380) {
+        cells[alienFront[randomComputerIndex]].classList.remove('bomb')
+        clearInterval(timerBombId)
+        startBomb()
+      } else {
+        cells[alienFront[randomComputerIndex]].classList.remove('bomb')
+        alienFront[randomComputerIndex] += width
+        cells[alienFront[randomComputerIndex]].classList.add('bomb')
       }
-    }, 200)
+    }, 500)
   }
+  startBomb()
   
+  // alienFront[randomComputerIndex] + width
+
+
+  // // console.log(a)
+  // bombIndex = parseInt(a)
+  // // console.log(bombIndex)
+  // const timerBombId = setInterval(() => {
+  //   if (bombIndex < (width * width)) {
+  //     cells[bombIndex].classList.add('bomb')
+  //     setTimeout(() => {
+  //       bombId = setInterval(() => {
+  //         cells[bombIndex].classList.remove('bomb')
+  //         bombIndex += width
+  //         // console.log(bombIndex)
+  //         cells[bombIndex].classList.add('bomb')
+  //         if (bombIndex <= 21) {
+  //           clearInterval(laserRepeat)
+  //         }
+  //         startBomb()
+  //       }, 200)
+  //     }, 200)
+
+  //   }
+  // }, 200)
+
+
 
 
   // function dropBomb() {
