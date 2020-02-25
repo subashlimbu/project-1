@@ -44,4 +44,5 @@ body {
 
 .bomb {
   background-image: url('https://wiki.computationalthinkingfoundation.org/wiki/images/7/7f/SpaceInvadersAlienBombDepiction.png');
+  background-size: contain;
 }
