@@ -6,15 +6,12 @@ function setupGame() {
   const cells = []
   let player = 390
   let laser = 390
-  // let laserIndex = 0
   let alienIndex = 0
   let bombIndex = 0
+  let laserIndex = 0
   let timerLaserId = 0
   let computerIndex = null
-  // let alien = 0
-  // let aliensInRow = 20
   let alienArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70]
-  // let alienArray = []
   let laserRepeat = null
   let bombId = null
 
@@ -35,7 +32,6 @@ function setupGame() {
 
   let alienDirection = 'right'
   let intervalId
-  let rightColumn
 
   function alienMoving() {
 
@@ -63,7 +59,6 @@ function setupGame() {
           }
           alienArray[i] = invader
           cells[invader].classList.add('alien')
-
         }
       } else if (alienDirection === 'left') {
         for (let i = 0; i < alienArray.length; i++) {
@@ -98,9 +93,7 @@ function setupGame() {
       })
     }, 100)
   }
-
-  let laserUp = true
-  let missileIndex = 0
+  alienMoving()
 
   function stopLaser() {
     cells[laserIndex].classList.remove('laser')
@@ -108,22 +101,17 @@ function setupGame() {
     laserIndex = null
   }
 
-  function destroyComputer() {
-    const targetComputer = alienArray.indexOf(laserIndex)
-    cells[alienArray.slice(targetComputer, targetComputer + 1)].classList.remove('alien')
-    alienArray.splice(targetComputer, 1)
-    stopLaser()
-    if (alienArray.length === 0) {
-      // winGameSound.play()
-      // gameTheme.pause()
-      setTimeout(levelUp, 5000)
-    }
-  }
-
   function startBomb() {
-    const randomComputerIndex = Math.floor(Math.random() * alienArray.length)
+   
     // console.log(randomComputerIndex)
-    const a = alienArray.slice(randomComputerIndex, randomComputerIndex + 1)
+    // console.log(randomComputerIndex)
+    const alienFront = alienArray.slice(-10)
+    const randomComputerIndex = Math.floor(Math.random() * alienFront.length)
+
+// alienFront[randomComputerIndex] + width
+
+
+    // console.log(a)
     bombIndex = parseInt(a)
     // console.log(bombIndex)
     const timerBombId = setInterval(() => {
@@ -139,14 +127,13 @@ function setupGame() {
               clearInterval(laserRepeat)
             }
             startBomb()
-          }, 2000)
-        }, 2000)
+          }, 200)
+        }, 200)
 
       }
-    }, 2000)
+    }, 200)
   }
- 
-  startBomb()
+  
 
 
   // function dropBomb() {
@@ -182,13 +169,18 @@ function setupGame() {
   // removeBomb()
 
   document.addEventListener('keydown', (event) => {
-    // console.log(event.key)
 
     if (event.keyCode === 32) {
       let laserIndex = player - width
       const laserInterval = setInterval(() => {
         if (laserIndex < 21) {
           cells[laserIndex].classList.remove('laser')
+          clearInterval(laserInterval)
+        }
+        if (cells[laserIndex].classList.contains('alien') === true) {
+          cells[laserIndex].classList.remove('laser')
+          cells[laserIndex].classList.remove('alien')
+          alienArray.splice(alienArray.indexOf(laserIndex), 1)
           clearInterval(laserInterval)
         } else {
           cells[laserIndex].classList.remove('laser')
