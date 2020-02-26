@@ -3,6 +3,10 @@ function setupGame() {
   const gridCellCount = width * width
   const grid = document.querySelector('.grid')
   const cell = document.querySelector('div')
+  const playerScore = document.querySelector('.playerScore')
+  const playerlevel = document.querySelector('.levels')
+  const playerLives = document.querySelector('.lives')
+  const startGame = document.querySelector('.start')
   const cells = []
   let player = 390
   let laser = 390
@@ -14,7 +18,9 @@ function setupGame() {
   let alienArray = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70]
   let laserRepeat = null
   let bombId = null
-
+  let score = 0
+  let lives = 3
+  let level = 1
 
   for (let i = 0; i < gridCellCount; i++) {
     const cell = document.createElement('div')
@@ -93,23 +99,31 @@ function setupGame() {
       })
     }, 500)
   }
-  alienMoving()
+  // alienMoving()
+  
 
   function startBomb() {
 
-    // console.log(randomComputerIndex)
-    // console.log(randomComputerIndex)
     const alienFront = alienArray.slice(-11)
-    console.log(alienFront)
+    // console.log(alienFront)
     let randomComputerIndex = Math.floor(Math.random() * alienFront.length)
-    console.log(randomComputerIndex)
+    // console.log(randomComputerIndex)      
 
     const timerBombId = setInterval(() => {
-      const dropBomb = alienFront[randomComputerIndex]
-      if (dropBomb > 380) {
-        cells[alienFront[randomComputerIndex]].classList.remove('bomb')
-        clearInterval(timerBombId)
-        startBomb()
+      let dropBomb = alienFront[randomComputerIndex]
+      if (dropBomb >= 380) {
+        if (cells[dropBomb].classList.contains('player')) {
+          cells[alienFront[randomComputerIndex]].classList.remove('bomb')
+          cells[player].classList.remove('player')
+          lives -= 1
+          checkLoseGame()
+          // playerLives.innerHTML = lives
+        } else {
+          cells[alienFront[randomComputerIndex]].classList.remove('bomb')
+          clearInterval(timerBombId)
+          dropBomb = 0
+          startBomb()
+        }
       } else {
         cells[alienFront[randomComputerIndex]].classList.remove('bomb')
         alienFront[randomComputerIndex] += width
@@ -117,67 +131,54 @@ function setupGame() {
       }
     }, 500)
   }
-  startBomb()
-  
-  // alienFront[randomComputerIndex] + width
+  // startBomb()
 
+  function updateScore(newScore, score) {
+    newScore.innerHTML = score
+  }
 
-  // // console.log(a)
-  // bombIndex = parseInt(a)
-  // // console.log(bombIndex)
-  // const timerBombId = setInterval(() => {
-  //   if (bombIndex < (width * width)) {
-  //     cells[bombIndex].classList.add('bomb')
-  //     setTimeout(() => {
-  //       bombId = setInterval(() => {
-  //         cells[bombIndex].classList.remove('bomb')
-  //         bombIndex += width
-  //         // console.log(bombIndex)
-  //         cells[bombIndex].classList.add('bomb')
-  //         if (bombIndex <= 21) {
-  //           clearInterval(laserRepeat)
-  //         }
-  //         startBomb()
-  //       }, 200)
-  //     }, 200)
+  let alienMovingTimer
 
-  //   }
-  // }, 200)
+  function checkWinGame() {
+    if (alienArray.length === 0) {
+      level += 1
+      playerLevel.innerHTML = level
+      clearInterval(alienMovingTimer)
+    }
+  }
 
-
-
-
-  // function dropBomb() {
-  //   if (bombIndex > (width * width)) {
-  //     clearInterval(timerBombId)
-  //     bombIndex = 0
-  //     startBomb()
-  //   } else {
-  //     clearInterval(timerBombId)
-  //     cells[bombIndex].classList.add('bomb')
-  //     setTimeout(removeBomb, 50)
-  //     // loseLife()
-  //   }
+  // function remainingLives(newLives, lives) {
+  //   newLives.innerHTML = lives
   // }
-  // dropBomb()
 
-  // function removeBomb() {
-  //   if (bombIndex <= (width * width)) {
-  //     console.log(bombIndex)
-  //     cells[bombIndex].classList.add('bomb')
-  //   }
-  //   const bombId = setInterval(() => {
-  //     cells[bombIndex].classList.remove('bomb')
-  //     bombIndex += width
-  //     console.log(bombIndex)
-  //     cells[bombIndex].classList.add('bomb')
+  function checkLoseGame() {
+    playerLives.innerHTML = lives
+    if (lives < 0) {
+      clearInterval(alienMovingTimer)
+      endGame()
+    } else {
+      alienArray.forEach((elem) => {
+        if (elem >= width * width - width) {
+          clearInterval(alienMovingTimer)
+          endGame()
+        }
+      })
+    }
+  }
 
+  function endGame() {
+    alert(`You died at level ${level}`)
+    alert(`Your score is ${score} `)
+  }
 
-  //   }, 500)
+  // let function stopStartButton() {
 
   // }
 
-  // removeBomb()
+
+
+
+
 
   document.addEventListener('keydown', (event) => {
 
@@ -193,6 +194,9 @@ function setupGame() {
           cells[laserIndex].classList.remove('alien')
           alienArray.splice(alienArray.indexOf(laserIndex), 1)
           clearInterval(laserInterval)
+          score += 20
+          updateScore(playerScore, score)
+          // checkWinGame()
         } else {
           cells[laserIndex].classList.remove('laser')
           laserIndex -= width
@@ -216,6 +220,14 @@ function setupGame() {
       player -= 1
       cells[player].classList.add('player')
     }
+  })
+
+  startGame.addEventListener('click', () => {
+    alienMoving()
+    startBomb()
+    checkLoseGame()
+    updateScore()
+    endgame()
   })
 }
 

@@ -3,7 +3,10 @@
 }
 
 body {
-  /* background-image: url('https://www.tynker.com/projects/screenshot/5b36e51e94e01d66268b456f/space-invaders.png'); */
+  background-image: url('https://www.tynker.com/projects/screenshot/5b36e51e94e01d66268b456f/space-invaders.png');
+  background-size: cover;
+  background-position: center;
+  color: orange;
   height: 100vh;
   display: flex;
   justify-content: center;
@@ -12,20 +15,64 @@ body {
   margin: 0
 }
 
+.heading {
+font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.div {
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+
 .grid {
   display: flex;
   flex-direction: row;
-  border: 1px solid grey;
-  width: 600px;
-  height: 600px;
+  /* border: 1px solid grey; */
+  width: 400px;
+  height: 400px;
   flex-wrap: wrap;
+}
+
+p {
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  padding: 20px 20px 20px 20px;
+  font-size: xx-large;
+  font-weight: 500;
+  /* font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; */
+  /* font-style: oblique; */
 }
 
 .cell {
   width: 5%;
   height: 5%;
-  border: 1px solid green;
+  /* border: 1px solid green; */
 }
+
+.display{
+  display: flex;
+  /* justify-content: space-around; */
+  /* max-width: 700px; */
+  /* margin: auto; */
+  /* padding: 50px; */
+  word-spacing: 100px;
+}
+
+button {
+  color: orange;
+  background-color: teal;
+  border: 4px solid #4CAF50;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.heading {
+  align-items: center;
+  background-size: contain;
+  margin: auto;
+}
+
 
 .player {
   background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRE6lQv4CewQp82n8ATj67gFqvDqUJyXLr_qF8CRWtMK6OSUfoU');
@@ -35,14 +82,26 @@ body {
 .alien {
   background-image: url('https://toppng.com/uploads/thumbnail//space-invaders-alien-space-invaders-alien-sprite-11563209507nmwvdi8s7b.png');
   background-size: contain;
+  background-repeat: no-repeat;
 }
 
 .laser {
-  background-image: url('https://wiki.computationalthinkingfoundation.org/wiki/images/d/d0/SpaceInvadersLaserDepiction.png');
+  background-image: url('https://www.pinclipart.com/picdir/middle/62-625813_missile-clipart-transparent-space-invaders-missile-png.png');
   background-size: contain;
+  background-position: center;
+  width: 5%;
+  height: 5%;
 }
 
 .bomb {
-  background-image: url('https://wiki.computationalthinkingfoundation.org/wiki/images/7/7f/SpaceInvadersAlienBombDepiction.png');
+  background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRw2whvwP_wOVAbKo6s-kQHaKtJHiQB59nqhZcswZS0lwPU8f7s');
   background-size: contain;
+  background-position: center;
+  width: 5%;
+  height: 5%;
+}
+
+img {
+  background-size: contain;
+
 }
