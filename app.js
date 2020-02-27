@@ -1,4 +1,4 @@
-function setupGame() {
+function main() {
   const width = 20
   const gridCellCount = width * width
   const grid = document.querySelector('.grid')
@@ -6,7 +6,10 @@ function setupGame() {
   const playerScore = document.querySelector('.playerScore')
   const playerlevel = document.querySelector('.levels')
   const playerLives = document.querySelector('.lives')
+  const startScreen = document.querySelector('.startScreen')
   const startGame = document.querySelector('.start')
+  const instruction = document.querySelector('.instruction')
+  const displayScore = document.querySelector('.display-score')
   const cells = []
   let player = 390
   let laser = 390
@@ -21,6 +24,13 @@ function setupGame() {
   let score = 0
   let lives = 3
   let level = 1
+  let bombInterval
+  let gameStarted = false
+  const shootAlienAudio = new Audio('sounds/shoot.wav')
+  const alienDieAudio = new Audio('sounds/invaderkilled.wav')
+  const playerDieAudio = new Audio('sounds/explosion.wav')
+
+
 
   for (let i = 0; i < gridCellCount; i++) {
     const cell = document.createElement('div')
@@ -93,48 +103,58 @@ function setupGame() {
         }
       }
       alienArray.forEach((invader) => {
+        // console.log(invader)
         if (invader >= 380) {
           clearInterval(intervalId)
         }
       })
     }, 500)
+    // bombInterval = setInterval(() => {
+    //   startBomb()
+    // }, 2000)
   }
   // alienMoving()
-  
+
 
   function startBomb() {
-
-    const alienFront = alienArray.slice(-11)
-    // console.log(alienFront)
-    let randomComputerIndex = Math.floor(Math.random() * alienFront.length)
     // console.log(randomComputerIndex)      
-
-    const timerBombId = setInterval(() => {
+    const endBomb = setInterval(() => {
+      const alienFront = alienArray.slice(-11)
+      // console.log(alienFront)
+      const randomComputerIndex = Math.floor(Math.random() * alienFront.length)
       let dropBomb = alienFront[randomComputerIndex]
-      if (dropBomb >= 380) {
-        if (cells[dropBomb].classList.contains('player')) {
-          cells[alienFront[randomComputerIndex]].classList.remove('bomb')
-          cells[player].classList.remove('player')
-          lives -= 1
-          checkLoseGame()
-          // playerLives.innerHTML = lives
-        } else {
-          cells[alienFront[randomComputerIndex]].classList.remove('bomb')
-          clearInterval(timerBombId)
-          dropBomb = 0
-          startBomb()
-        }
-      } else {
-        cells[alienFront[randomComputerIndex]].classList.remove('bomb')
-        alienFront[randomComputerIndex] += width
-        cells[alienFront[randomComputerIndex]].classList.add('bomb')
-      }
-    }, 500)
-  }
-  // startBomb()
+      dropBomb += 20
+      cells[dropBomb].classList.add('bomb')
 
-  function updateScore(newScore, score) {
-    newScore.innerHTML = score
+      const dropBombId = setInterval(() => {
+        if (dropBomb < 380) {
+          cells[dropBomb].classList.remove('bomb')
+          if (dropBomb + 20 < 380) {
+            dropBomb += 20
+            cells[dropBomb].classList.add('bomb')
+          } else {
+            cells[dropBomb].classList.remove('bomb')
+            clearInterval(dropBombId)
+
+            // dropBomb = 0
+          }
+        }
+        // if (cells[dropBomb].classList.contains('player')) {
+        //   cells[dropBomb].classList.remove('bomb')
+        //   cells[player].classList.remove('player')
+        //   console.log('hello')
+        //   lives -= 1
+        //   playerLives.innerHTML = lives
+        //   playerDieAudio.play()
+        //   checkLoseGame()
+        // } else {
+
+
+        // clearInterval(dropBombId) 
+      }, 500)
+
+
+    }, 2000)
   }
 
   let alienMovingTimer
@@ -147,22 +167,26 @@ function setupGame() {
     }
   }
 
-  // function remainingLives(newLives, lives) {
-  //   newLives.innerHTML = lives
-  // }
-
   function checkLoseGame() {
     playerLives.innerHTML = lives
     if (lives < 0) {
       clearInterval(alienMovingTimer)
-      endGame()
+      // endGame()
     } else {
       alienArray.forEach((elem) => {
         if (elem >= width * width - width) {
           clearInterval(alienMovingTimer)
-          endGame()
+          // endGame()
         }
       })
+    }
+  }
+
+  function removeBombLaser() {
+    if (cell[bombIndex].classList.contains(laserIndex)) {
+      cells[bombIndex].classList.remove('bomb')
+      cells[laserIndex].classList.remove('laser')
+      clearInterval(intervalId)
     }
   }
 
@@ -170,15 +194,6 @@ function setupGame() {
     alert(`You died at level ${level}`)
     alert(`Your score is ${score} `)
   }
-
-  // let function stopStartButton() {
-
-  // }
-
-
-
-
-
 
   document.addEventListener('keydown', (event) => {
 
@@ -192,16 +207,22 @@ function setupGame() {
         if (cells[laserIndex].classList.contains('alien') === true) {
           cells[laserIndex].classList.remove('laser')
           cells[laserIndex].classList.remove('alien')
+          alienDieAudio.play()
           alienArray.splice(alienArray.indexOf(laserIndex), 1)
           clearInterval(laserInterval)
           score += 20
-          updateScore(playerScore, score)
+          playerScore.innerHTML = score
           // checkWinGame()
         } else {
           cells[laserIndex].classList.remove('laser')
           laserIndex -= width
           cells[laserIndex].classList.add('laser')
+          shootAlienAudio.play()
+
+
+          // removeBombLaser() 
         }
+
       }, 200)
     }
 
@@ -223,12 +244,53 @@ function setupGame() {
   })
 
   startGame.addEventListener('click', () => {
+    startScreen.style.display = 'none'
+    startGame.style.display = 'none'
+    grid.style.display = 'flex'
     alienMoving()
-    startBomb()
     checkLoseGame()
-    updateScore()
-    endgame()
+    startBomb()
+    // updateScore()
+    // endgame()
   })
 }
 
-window.addEventListener('DOMContentLoaded', setupGame)
+window.addEventListener('DOMContentLoaded', main)
+
+
+// function renderList(scores, scoresList) {
+//   const array = scores.sort((playerA, playerB) => playerB.score - playerA.score).map(player => {
+//     return `<li>
+//       ${player.name} has <strong>${player.score}</strong> apples.
+//     </li>`
+//   })
+//   scoresList.innerHTML = array.join('')
+// }
+
+// function displayScore() {
+//   let scores = []
+//   const scoresList = document.querySelector('ol')
+//   const playButton = document.querySelector('h3')
+
+//   if (localStorage) {
+//     const players = JSON.parse(localStorage.getItem('players'))
+//     if (players) {
+//       scores = players
+//       renderList(scores, scoresList)
+//     }
+//   }
+
+//   playButton.addEventListener('click', () => {
+//     const newName = prompt('By what name are you known?')
+//     const newScore = prompt('How many apples do you possess?')
+//     const player = { name: newName, score: newScore }
+//     scores.push(player)
+//     renderList(scores, scoresList)
+//     if (localStorage) {
+//       localStorage.setItem('players', JSON.stringify(scores))
+//     }
+//   })
+
+// }
+
+// window.addEventListener('DOMContentLoaded', displayScore)

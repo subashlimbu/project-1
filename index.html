@@ -4,17 +4,40 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="app.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Viga&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="main.css">
   <title>Subash---Space Invaders---</title>
 </head>
 <body>
-<div class="heading">
-  <p>SPACE INVADERS</p>
-</div>
+  <div class= "startScreen">
+    <h1>Space Invaders</h1>
 
-<div class="start">
+    <div class= "instruction">
+      <h3> Instructions </h3>
+      <p> To move spaceship: Keys <--^--> </p>
+      <p> To shoot: Spacebar </p>
+    </div>
+
+    <p class="displayScore"></p>
+
+    <div class = "highScore">
+      <h2> Score Board </h2>
+      <ul class="players"></ul>
+
+      <form class="display-score">
+        <input type="text" name="playerName" placeholder="Name">
+        <input type="submit" value="Save Score">
+      </form>
+    </div>
+
+
+    
+    <button class="start">PRESS START</button>
+  
+  </div>
+<!-- <div class="start">
   <button>Start Game</button>
-</div>
+</div> -->
 
   <div class= "display">
     <p> Score:<span class = "playerScore"> 0 </span> </p>
