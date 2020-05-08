@@ -113,8 +113,6 @@ function main() {
     //   startBomb()
     // }, 2000)
   }
-  // alienMoving()
-
 
   function startBomb() {
     // console.log(randomComputerIndex)      
@@ -256,41 +254,3 @@ function main() {
 }
 
 window.addEventListener('DOMContentLoaded', main)
-
-
-// function renderList(scores, scoresList) {
-//   const array = scores.sort((playerA, playerB) => playerB.score - playerA.score).map(player => {
-//     return `<li>
-//       ${player.name} has <strong>${player.score}</strong> apples.
-//     </li>`
-//   })
-//   scoresList.innerHTML = array.join('')
-// }
-
-// function displayScore() {
-//   let scores = []
-//   const scoresList = document.querySelector('ol')
-//   const playButton = document.querySelector('h3')
-
-//   if (localStorage) {
-//     const players = JSON.parse(localStorage.getItem('players'))
-//     if (players) {
-//       scores = players
-//       renderList(scores, scoresList)
-//     }
-//   }
-
-//   playButton.addEventListener('click', () => {
-//     const newName = prompt('By what name are you known?')
-//     const newScore = prompt('How many apples do you possess?')
-//     const player = { name: newName, score: newScore }
-//     scores.push(player)
-//     renderList(scores, scoresList)
-//     if (localStorage) {
-//       localStorage.setItem('players', JSON.stringify(scores))
-//     }
-//   })
-
-// }
-
-// window.addEventListener('DOMContentLoaded', displayScore)
