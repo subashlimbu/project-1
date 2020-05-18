@@ -289,6 +289,11 @@ When case 32 is called (keyup on the space bar), the player's laser fires. A var
 
 ```
 
+### Screenshots
+
+<img src=images/home.png width=500>
+<img src=images/game.png width=500>
+
 
 # **Process**
 
@@ -311,6 +316,11 @@ There were several timings and aliens direction bugs that I had to deal with. Fo
 
 - The project really helped to consolidate my knowledge of JavaScript, HTML and CSS and interacting with the DOM. 
 
+## Key learnings
+- Working with lots of functions.
+- Plan ahead.
+- Naming variables appropriately.
+- Styling using CSS.
 
 ## Potential future features
 
