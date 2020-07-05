@@ -1,50 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="app.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Viga&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="main.css">
-  <title>---Space Invaders---</title>
-</head>
-<body>
-  <div class= "startScreen">
-    <h1>Space Invaders</h1>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>Space Wars</title>
+    <link rel="stylesheet" href="css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=VT323&display=swap"
+      rel="stylesheet"
+    />
+    <script src="js/app.js" charset="utf-8"></script>
+  </head>
 
-    <div class= "instruction">
-      <h3> Instructions </h3>
-      <p> To move spaceship: Keys <--^--> </p>
-      <p> To shoot: Spacebar </p>
+  <body>
+    <audio id="playerlasersound" src="sounds/playerlasersound.mp3"></audio>
+    <audio id="enemylasersound" src="sounds/enemylasersound.mp3"></audio>
+    <audio id="enemyflyingsound" src="sounds/enemyflyingsound.mp3"></audio>
+    <audio id="explosion" src="sounds/Explosion.wav"></audio>
+    <audio id="playerexplosion" src="sounds/playerexplosion.wav"></audio>
+    <audio id="nomoon" src="assets/thisisnomoon.m4a"></audio>
+    <audio id="bosstheme" src="assets/Bosstheme.m4a"></audio>
+    <audio id="playernoise" src="sounds/playernoise.wav"></audio>
+    <audio id="thememusic" src="sounds/alien-spaceship.wav"></audio>
+
+    <section class="score">
+      <h2></h2>
+      <h2 class="bosshealth"></h2>
+    </section>
+
+    <div class="grid">
+      <div id="mobile">
+        <h1>SPACE INVADERS</h1>
+        <p>
+          Unfortunately, this game is not supported on mobile. Please try
+          playing on a computer!
+        </p>
+      </div>
+
+      <section class="start">
+        <h1>SPACE INVADERS</h1>
+        <h3>
+          Use LEFT and RIGHT arrow keys to move and SPACE bar to fire lasers
+        </h3>
+        <h2>Click to Start</h2>
+      </section>
+
+      <section class="victory">
+        <h1>VICTORY!</h1>
+        <h2 class="winningscore"></h2>
+        <h2>Click to Restart</h2>
+      </section>
+
+      <section class="GameOver">
+        <h1>GAME OVER</h1>
+        <h2 class="finalscore"></h2>
+        <h2>Click to Restart</h2>
+      </section>
     </div>
-
-    <p class="displayScore"></p>
-
-    <div class = "highScore">
-      <h2> Score Board </h2>
-      <ul class="players"></ul>
-
-      <form class="display-score">
-        <input type="text" name="playerName" placeholder="Name">
-        <input type="submit" value="Save Score">
-      </form>
-    </div>
-
-
-    
-    <button class="start">PRESS START</button>
-  
-  </div>
-<!-- <div class="start">
-  <button>Start Game</button>
-</div> -->
-
-  <div class= "display">
-    <p> Score:<span class = "playerScore"> 0 </span> </p>
-    <p> Level:<span class = "levels"> 1 </span> </p>
-    <p> Lives:<span class = "lives"> 3 </span> </p>
-  </div>
-  
-  <div class="grid"></div>
-</body>
+  </body>
 </html>
